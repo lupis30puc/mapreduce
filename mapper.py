@@ -35,13 +35,17 @@ for line in sys.stdin:
     data = line.strip().split("\t")
 
     # store the 6 elements of the tuple in seperate variables
-    date, time, item, category, sales, payment = data
+    try:
+    	date, time, item, category, sales, payment = data
+    except ValueError:
+	print('there are no 6 elements')
 
     # Write the key-value combination to standard output (stdout)
     # Key is the payment, value is the sales     
     # With a tab (\t) between key and value
     # New line \n means new record.stdout.write("{0}\t{1}\n".format(payment, sales))
-    sys.stdout.write("{0}\t{1}\n".format(category, sales))
+    if category == 'Computers' or category == 'Cameras' or  category == 'Video Games':
+	    sys.stdout.write("{0}\t{1}\n".format(category, sales))
 
 
 
