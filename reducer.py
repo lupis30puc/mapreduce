@@ -21,8 +21,7 @@ import sys
 
 # Sum and average of all sales (values) is initialized with zero, we just started
 sum_of_values = 0
-current_count = 0
-count_of_values = 0
+current_values = []
 avg_of_values = 0
 
 
@@ -51,7 +50,7 @@ for line in sys.stdin:
         # Line ends with new line (\n)
         sys.stdout.write("{0}\t{1}\n".format(previous_key, current_count))
         # Count of sales starts again with 0
-        current_count = 0
+        current_values = []
 	sum_of_values = 0
 	avg_of_values = 0
 
@@ -59,14 +58,13 @@ for line in sys.stdin:
     # a += b is the same as a = a + b
     # the float function transforms the value
     # to a float data type (like decimal)
-    current_count += 1
+    current_values.append(value)
 
     sum_of_values += float(value) 
-    count_of_values += current_count
-    avg_of_values = sum_of_values/current_count 
+    avg_of_values = sum_of_values/len(current_values)
     # the previous key for the next iteration is the current key of the this iteration 
     previous_key = key
 
 # write the last result to stdout
-if current_count > 114:
+if len(current_values) > 114:
 	sys.stdout.write("{0}\t{1}\n".format(previous_key, avg_of_values))
